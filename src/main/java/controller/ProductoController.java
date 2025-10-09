@@ -1,8 +1,10 @@
 package controller;
 
 import model.Producto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import repository.UsuarioRepository;
 import service.interfaces.ProductoService;
 
 import java.util.List;
@@ -12,7 +14,9 @@ import java.util.List;
 @CrossOrigin
 public class ProductoController {
 
+
     private final ProductoService productoService;
+    private UsuarioRepository usuarioRepository;
 
     public ProductoController(ProductoService productoService) {
         this.productoService = productoService;
@@ -31,20 +35,36 @@ public class ProductoController {
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado")));
     }
 
-    // Endpoints admin (para HU-005, los dejo aquí para cuando tu compañero los habilite)
+
     @PostMapping
-    public ResponseEntity<Producto> crear(@RequestBody Producto producto) {
+    public ResponseEntity<?> crear(@RequestParam Long adminId, @RequestBody Producto producto) {
+        if (!esAdmin(adminId)) return ResponseEntity.status(403).body("No autorizado");
         return ResponseEntity.ok(productoService.guardar(producto));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Producto> actualizar(@PathVariable Long id, @RequestBody Producto producto) {
+    public ResponseEntity<?> actualizar(@PathVariable Long id, @RequestParam Long adminId, @RequestBody Producto producto) {
+        if (!esAdmin(adminId)) return ResponseEntity.status(403).body("No autorizado");
         return ResponseEntity.ok(productoService.actualizar(id, producto));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+    public ResponseEntity<?> eliminar(@PathVariable Long id, @RequestParam Long adminId) {
+        if (!esAdmin(adminId)) return ResponseEntity.status(403).body("No autorizado");
         productoService.eliminar(id);
         return ResponseEntity.noContent().build();
+    }
+
+    private boolean esAdmin(Long idUsuario) {
+        // Validar desde UsuarioRepository
+        return usuarioRepository.findById(idUsuario)
+                .map(u -> "ADMIN".equalsIgnoreCase(u.getRol()))
+                .orElse(false);
+    }
+
+    @Autowired
+    public ProductoController(ProductoService productoService, UsuarioRepository usuarioRepository) {
+        this.productoService = productoService;
+        this.usuarioRepository = usuarioRepository;
     }
 }
