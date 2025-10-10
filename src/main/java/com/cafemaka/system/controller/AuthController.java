@@ -1,9 +1,9 @@
-package controller;
+package com.cafemaka.system.controller;
 
-import model.Usuario;
+import com.cafemaka.system.model.Usuario;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import service.interfaces.AuthService;
+import com.cafemaka.system.service.interfaces.AuthService;
 
 @RestController
 @RequestMapping("/api/auth")

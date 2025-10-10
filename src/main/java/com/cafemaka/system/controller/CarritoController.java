@@ -1,9 +1,9 @@
-package controller;
+package com.cafemaka.system.controller;
 
-import model.Carrito;
+import com.cafemaka.system.model.Carrito;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import service.interfaces.CarritoService;
+import com.cafemaka.system.service.interfaces.CarritoService;
 
 public class CarritoController {
 

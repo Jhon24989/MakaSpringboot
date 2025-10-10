@@ -1,11 +1,11 @@
-package controller;
+package com.cafemaka.system.controller;
 
-import model.Producto;
+import com.cafemaka.system.model.Producto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import repository.UsuarioRepository;
-import service.interfaces.ProductoService;
+import com.cafemaka.system.repository.UsuarioRepository;
+import com.cafemaka.system.service.interfaces.ProductoService;
 
 import java.util.List;
 

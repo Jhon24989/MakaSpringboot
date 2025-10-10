@@ -1,14 +1,14 @@
-package service.impl;
+package com.cafemaka.system.service.impl;
 
+import com.cafemaka.system.model.Carrito;
 import jakarta.transaction.Transactional;
-import model.Carrito;
-import model.ItemCarrito;
-import model.Producto;
-import model.Usuario;
-import repository.CarritoRepository;
-import repository.ProductoRepository;
-import repository.UsuarioRepository;
-import service.interfaces.CarritoService;
+import com.cafemaka.system.model.ItemCarrito;
+import com.cafemaka.system.model.Producto;
+import com.cafemaka.system.model.Usuario;
+import com.cafemaka.system.repository.CarritoRepository;
+import com.cafemaka.system.repository.ProductoRepository;
+import com.cafemaka.system.repository.UsuarioRepository;
+import com.cafemaka.system.service.interfaces.CarritoService;
 
 public class CarritoServiceImpl implements CarritoService {
 
