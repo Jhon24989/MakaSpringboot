@@ -1,6 +1,6 @@
-package service.interfaces;
+package com.cafemaka.system.service.interfaces;
 
-import model.Carrito;
+import com.cafemaka.system.model.Carrito;
 
 public interface CarritoService {
 
