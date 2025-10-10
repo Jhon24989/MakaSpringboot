@@ -1,6 +1,6 @@
-package service.interfaces;
+package com.cafemaka.system.service.interfaces;
 
-import model.Receta;
+import com.cafemaka.system.model.Receta;
 
 import java.util.List;
 

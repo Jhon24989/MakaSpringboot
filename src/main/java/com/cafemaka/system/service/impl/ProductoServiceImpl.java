@@ -1,9 +1,9 @@
-package service.impl;
+package com.cafemaka.system.service.impl;
 
-import model.Producto;
+import com.cafemaka.system.model.Producto;
 import org.springframework.stereotype.Service;
-import repository.ProductoRepository;
-import service.interfaces.ProductoService;
+import com.cafemaka.system.repository.ProductoRepository;
+import com.cafemaka.system.service.interfaces.ProductoService;
 
 import java.util.List;
 

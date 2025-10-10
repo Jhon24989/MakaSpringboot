@@ -1,6 +1,6 @@
-package repository;
+package com.cafemaka.system.repository;
 
-import model.Usuario;
+import com.cafemaka.system.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

@@ -1,9 +1,9 @@
-package service.impl;
+package com.cafemaka.system.service.impl;
 
-import model.Usuario;
+import com.cafemaka.system.model.Usuario;
 import org.springframework.stereotype.Service;
-import repository.UsuarioRepository;
-import service.interfaces.AuthService;
+import com.cafemaka.system.repository.UsuarioRepository;
+import com.cafemaka.system.service.interfaces.AuthService;
 
 @Service
 public class AuthServiceImpl implements AuthService {
