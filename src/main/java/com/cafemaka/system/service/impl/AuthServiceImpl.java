@@ -34,6 +34,6 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public Usuario obtenerPerfil(Long id) {
         return usuarioRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con id: " + id));
+                .orElse(null);
     }
 }

@@ -1,9 +1,12 @@
 package com.cafemaka.system.controller;
 
 import com.cafemaka.system.model.Usuario;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.cafemaka.system.service.interfaces.AuthService;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -16,7 +19,7 @@ public class AuthController {
         this.authService = authService;
     }
 
-    @PostMapping("/register")
+    @PostMapping("/registrar")
     public ResponseEntity<Usuario> register(@RequestBody Usuario usuario) {
         return ResponseEntity.ok(authService.register(usuario));
     }
@@ -30,8 +33,13 @@ public class AuthController {
 
     // NUEVO: ver perfil
     @GetMapping("/perfil/{id}")
-    public ResponseEntity<Usuario> verPerfil(@PathVariable Long id) {
+    public ResponseEntity<?> verPerfil(@PathVariable("id") Long id) {
         Usuario usuario = authService.obtenerPerfil(id);
+        if (usuario == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Map.of("mensaje", "El usuario con ID " + id + " no existe"));
+        }
         return ResponseEntity.ok(usuario);
     }
+
 }

@@ -1,11 +1,11 @@
 package com.cafemaka.system.controller;
 
 import com.cafemaka.system.model.Producto;
+import com.cafemaka.system.repository.UsuarioRepository;
+import com.cafemaka.system.service.interfaces.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import com.cafemaka.system.repository.UsuarioRepository;
-import com.cafemaka.system.service.interfaces.ProductoService;
 
 import java.util.List;
 
@@ -14,57 +14,76 @@ import java.util.List;
 @CrossOrigin
 public class ProductoController {
 
-
     private final ProductoService productoService;
-    private UsuarioRepository usuarioRepository;
+    private final UsuarioRepository usuarioRepository;
 
-    public ProductoController(ProductoService productoService) {
-        this.productoService = productoService;
-    }
-
-    @GetMapping
-    public ResponseEntity<List<Producto>> listar() {
-        return ResponseEntity.ok(productoService.listar());
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Producto> obtener(@PathVariable Long id) {
-        return ResponseEntity.ok(productoService.listar().stream()
-                .filter(p -> p.getId().equals(id))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Producto no encontrado")));
-    }
-
-
-    @PostMapping
-    public ResponseEntity<?> crear(@RequestParam Long adminId, @RequestBody Producto producto) {
-        if (!esAdmin(adminId)) return ResponseEntity.status(403).body("No autorizado");
-        return ResponseEntity.ok(productoService.guardar(producto));
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<?> actualizar(@PathVariable Long id, @RequestParam Long adminId, @RequestBody Producto producto) {
-        if (!esAdmin(adminId)) return ResponseEntity.status(403).body("No autorizado");
-        return ResponseEntity.ok(productoService.actualizar(id, producto));
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> eliminar(@PathVariable Long id, @RequestParam Long adminId) {
-        if (!esAdmin(adminId)) return ResponseEntity.status(403).body("No autorizado");
-        productoService.eliminar(id);
-        return ResponseEntity.noContent().build();
-    }
-
-    private boolean esAdmin(Long idUsuario) {
-        // Validar desde UsuarioRepository
-        return usuarioRepository.findById(idUsuario)
-                .map(u -> "ADMIN".equalsIgnoreCase(u.getRol()))
-                .orElse(false);
-    }
-
+    // Inyección de dependencias vía constructor
     @Autowired
     public ProductoController(ProductoService productoService, UsuarioRepository usuarioRepository) {
         this.productoService = productoService;
         this.usuarioRepository = usuarioRepository;
     }
+
+    // -------------------------------
+    // MÉTODOS PÚBLICOS DEL CONTROLADOR
+    // -------------------------------
+
+    // Listar todos los productos
+    @GetMapping
+    public ResponseEntity<List<Producto>> listar() {
+        return ResponseEntity.ok(productoService.listar());
+    }
+
+    // Obtener un producto por ID
+    @GetMapping("/{id}")
+    public ResponseEntity<Producto> obtener(@PathVariable Long id) {
+        return productoService.listar().stream()
+                .filter(p -> p.getId().equals(id))
+                .findFirst()
+                .map(ResponseEntity::ok)
+                .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
+    }
+
+    // Crear un producto (solo admin)
+    @PostMapping("/admin/{adminId}")
+    public ResponseEntity<?> crear(@PathVariable Long adminId, @RequestBody Producto producto) {
+        if (!esAdmin(adminId)) {
+            return ResponseEntity.status(403).body("El usuario no es administrador");
+        }
+        return ResponseEntity.ok(productoService.guardar(producto));
+    }
+
+    // Actualizar un producto (solo admin)
+    @PutMapping("/{id}/admin/{adminId}")
+    public ResponseEntity<?> actualizar(@PathVariable Long id,
+                                        @PathVariable Long adminId,
+                                        @RequestBody Producto producto) {
+        if (!esAdmin(adminId)) {
+            return ResponseEntity.status(403).body("No autorizado");
+        }
+        return ResponseEntity.ok(productoService.actualizar(id, producto));
+    }
+
+    // Eliminar un producto (solo admin)
+    @DeleteMapping("/{id}/admin/{adminId}")
+    public ResponseEntity<?> eliminar(@PathVariable Long id, @PathVariable Long adminId) {
+        if (!esAdmin(adminId)) {
+            return ResponseEntity.status(403).body("No autorizado");
+        }
+        productoService.eliminar(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    // -------------------------------
+    // MÉTODOS PRIVADOS AUXILIARES
+    // -------------------------------
+
+    // Verifica si el usuario es administrador
+    private boolean esAdmin(Long idUsuario) {
+        return usuarioRepository.findById(idUsuario)
+                .map(u -> "ADMIN".equalsIgnoreCase(u.getRol()))
+                .orElse(false);
+    }
 }
+
+
