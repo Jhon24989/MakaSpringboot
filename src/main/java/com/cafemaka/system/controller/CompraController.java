@@ -26,7 +26,7 @@ public class CompraController {
     }
 
     @GetMapping("/historial/{clienteId}")
-    public ResponseEntity<List<Compra>> historial(@PathVariable Long clienteId) {
+    public ResponseEntity<List<Compra>> historial(@PathVariable("clienteId") Long clienteId) {
         return ResponseEntity.ok(compraService.obtenerHistorial(clienteId));
     }
 }
