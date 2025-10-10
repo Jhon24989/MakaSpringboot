@@ -24,10 +24,6 @@ public class ProductoController {
         this.usuarioRepository = usuarioRepository;
     }
 
-    // -------------------------------
-    // MÉTODOS PÚBLICOS DEL CONTROLADOR
-    // -------------------------------
-
     // Listar todos los productos
     @GetMapping
     public ResponseEntity<List<Producto>> listar() {
@@ -73,10 +69,6 @@ public class ProductoController {
         productoService.eliminar(id);
         return ResponseEntity.noContent().build();
     }
-
-    // -------------------------------
-    // MÉTODOS PRIVADOS AUXILIARES
-    // -------------------------------
 
     // Verifica si el usuario es administrador
     private boolean esAdmin(Long idUsuario) {
