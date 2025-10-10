@@ -1,4 +1,4 @@
-package model;
+package com.cafemaka.system.model;
 
 import jakarta.persistence.*;
 
@@ -50,4 +50,3 @@ public class Carrito {
         }
     }
 
-}

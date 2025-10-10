@@ -1,6 +1,6 @@
-package service.interfaces;
+package com.cafemaka.system.service.interfaces;
 
-import model.Producto;
+import com.cafemaka.system.model.Producto;
 
 import java.util.List;
 

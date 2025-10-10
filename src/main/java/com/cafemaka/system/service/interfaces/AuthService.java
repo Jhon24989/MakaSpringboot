@@ -1,6 +1,6 @@
-package service.interfaces;
+package com.cafemaka.system.service.interfaces;
 
-import model.Usuario;
+import com.cafemaka.system.model.Usuario;
 
 public interface AuthService {
     Usuario register(Usuario usuario);

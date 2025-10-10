@@ -1,9 +1,9 @@
-package controller;
+package com.cafemaka.system.controller;
 
-import model.Receta;
+import com.cafemaka.system.model.Receta;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import service.interfaces.RecetaService;
+import com.cafemaka.system.service.interfaces.RecetaService;
 
 import java.util.List;
 

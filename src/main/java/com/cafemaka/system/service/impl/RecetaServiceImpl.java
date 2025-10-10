@@ -1,9 +1,9 @@
-package service.impl;
+package com.cafemaka.system.service.impl;
 
-import model.Receta;
+import com.cafemaka.system.model.Receta;
 import org.springframework.stereotype.Service;
-import repository.RecetaRepository;
-import service.interfaces.RecetaService;
+import com.cafemaka.system.repository.RecetaRepository;
+import com.cafemaka.system.service.interfaces.RecetaService;
 
 import java.util.List;
 
