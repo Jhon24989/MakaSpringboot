@@ -2,6 +2,7 @@ package service.impl;
 
 import model.Usuario;
 import org.springframework.stereotype.Service;
+import repository.UsuarioRepository;
 import service.interfaces.AuthService;
 
 @Service
