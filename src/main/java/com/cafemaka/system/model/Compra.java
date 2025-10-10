@@ -30,12 +30,29 @@ public class Compra {
 
     // getters/setters
     public Long getId() { return id; }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Usuario getCliente() { return cliente; }
-    public void setCliente(Usuario cliente) { this.cliente = cliente; }
+
+    public void setCliente(Usuario cliente) {
+        this.cliente = cliente;
+    }
     public double getTotal() { return total; }
-    public void setTotal(double total) { this.total = total; }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
     public LocalDateTime getFecha() { return fecha; }
-    public void setFecha(LocalDateTime fecha) { this.fecha = fecha; }
+
+    public void setFecha(LocalDateTime fecha) {
+        this.fecha = fecha;
+    }
     public List<DetalleCompra> getDetalles() { return detalles; }
-    public void setDetalles(List<DetalleCompra> detalles) { this.detalles = detalles; }
+
+    public void setDetalles(List<DetalleCompra> detalles) {
+        this.detalles = detalles;
+    }
 }
