@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.*;
 import com.cafemaka.system.service.interfaces.AuthService;
 
 import java.util.Map;
-
-@RestController
-@RequestMapping("/api/auth")
+//anotaciones
+@RestController //maneja peticiones http
+@RequestMapping("/api/auth")//define ruta y tipo de peticion.
 @CrossOrigin
 public class AuthController {
 
@@ -39,7 +39,7 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body(Map.of("mensaje", "El usuario con ID " + id + " no existe"));
         }
-        return ResponseEntity.ok(usuario);
+        return ResponseEntity.ok(usuario);//respuesta http
     }
 
 }

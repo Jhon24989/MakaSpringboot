@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import com.cafemaka.system.repository.UsuarioRepository;
 import com.cafemaka.system.service.interfaces.AuthService;
 
-@Service
+@Service // marca una clase como parte de la logica de negocio
 public class AuthServiceImpl implements AuthService {
 
     private final UsuarioRepository usuarioRepository;

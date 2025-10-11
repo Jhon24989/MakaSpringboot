@@ -18,7 +18,7 @@ public class ProductoController {
     private final UsuarioRepository usuarioRepository;
 
     // Inyección de dependencias vía constructor
-    @Autowired
+    @Autowired //inyecta dependencias automaticamente
     public ProductoController(ProductoService productoService, UsuarioRepository usuarioRepository) {
         this.productoService = productoService;
         this.usuarioRepository = usuarioRepository;
