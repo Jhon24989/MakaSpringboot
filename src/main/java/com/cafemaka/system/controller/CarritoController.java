@@ -14,7 +14,7 @@ public class CarritoController {
     }
 
     @GetMapping("/{usuarioId}")
-    public ResponseEntity<Carrito> ver(@PathVariable Long usuarioId) {
+    public ResponseEntity<Carrito> ver(@PathVariable Long usuarioId) {//odtiene valores desde la url
         return ResponseEntity.ok(carritoService.verCarrito(usuarioId));
     }
 

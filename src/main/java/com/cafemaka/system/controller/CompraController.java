@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/compras")
-@CrossOrigin
+@CrossOrigin//controla el acceso a la api
 public class CompraController {
 
     private final CompraService compraService;

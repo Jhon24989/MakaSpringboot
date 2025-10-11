@@ -1,5 +1,6 @@
 package com.cafemaka.system.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -15,6 +16,8 @@ public class DetalleCompra {
     private double subtotal;
 
     @ManyToOne
+    @JoinColumn(name = "compra_id")
+    @JsonBackReference
     private Compra compra;
 
     public DetalleCompra() {}

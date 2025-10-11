@@ -31,7 +31,7 @@ public class CompraServiceImpl implements CompraService {
     }
 
     @Override
-    @Transactional
+    @Transactional // si algo falla revierte los cambios hechos en la database
     public Compra realizarCompra(CompraDTO request) {
         Usuario cliente = usuarioRepo.findById(request.getClienteId())
                 .orElseThrow(() -> new RuntimeException("Cliente no encontrado"));
@@ -67,4 +67,5 @@ public class CompraServiceImpl implements CompraService {
     public List<Compra> obtenerHistorial(Long clienteId) {
         return compraRepo.findByClienteId(clienteId);
     }
+
 }
